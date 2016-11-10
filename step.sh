@@ -41,7 +41,7 @@ echo " (i) Pushing packages matching pattern ${nupkg_pattern}"
 # find packages matching pattern
 find -E . -type f -iregex "${nupkg_pattern}" | while read i; do
 	echo " (i) Pushing ${i}..."
-	"${nuget}" push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
+	echo "${nuget}" push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
 	echo " (i) Done"
 done
 
