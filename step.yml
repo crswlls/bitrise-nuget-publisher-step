@@ -1,0 +1,47 @@
+title: NuGet package push
+summary: Push generated nupkg files into a NuGet repository
+description: 
+website: https://github.com/benlacey/bitrise-nuget-push-step
+source_code_url: https://github.com/benlacey/bitrise-nuget-push-step
+support_url: https://github.com/benlacey/bitrise-nuget-push-step/issues
+host_os_tags:
+  - osx-10.10
+project_type_tags:
+  - ios
+  - android
+  - xamarin
+type_tags:
+  - script
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+  - nuget_source_path_or_url:
+    opts:
+      title: "NuGet repository URL"
+      summary: URL of the repository into which you want to push the packages
+      is_expand: true
+      is_required: true
+      value_options: []
+  - nuget_api_key:
+    opts:
+      title: "NuGet API key"
+      summary: The API key to use when pushing the packages
+      is_expand: true
+      is_required: true
+      value_options: []
+  - nuspec_pattern: 
+    opts:
+      title: "Pattern matching nuspec files to package"
+      summary: Regex pattern for which nuspec files should be packaged.
+      is_expand: true
+      is_required: false
+      value_options: []
+  - nupkg_pattern: 
+    opts:
+      title: "Pattern matching nupkg files to push"
+      summary: Regex pattern for which nupkg files should be pushed.
+      is_expand: true
+      is_required: false
+      value_options: []
