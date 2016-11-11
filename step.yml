@@ -45,3 +45,15 @@ inputs:
       is_expand: true
       is_required: false
       value_options: []
+  - test_mode: "yes"
+    opts:
+      title: "Test mode"
+      summary: When set to true, packages will not actually be pushed
+      description:  |-
+        If you just want to see what the publisher would push, set this to true.
+        The output will then contain the nuget command line that would be executed.
+      is_expand: false
+      is_required: false
+      value_options:
+        - "yes"
+        - "no"
