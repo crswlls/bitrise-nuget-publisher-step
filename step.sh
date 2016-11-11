@@ -21,24 +21,37 @@ if [ -z "${nupkg_pattern}" ] ; then
   nupkg_pattern="^\.\/[^/]+.nupkg"
 fi
 
+echo "source:  ${nuget_source_path_or_url}"
+echo "api key: ${nuget_api_key}"
+echo "nuspecs: ${nuspec_pattern}"
+echo "nupkgs:  ${nupkg_pattern}"
+echo ""
+
 nuget="/Library/Frameworks/Mono.framework/Versions/Current/bin/nuget"
 
 echo " (i) Packaging specs matching pattern ${nuspec_pattern}"
 
 # find nuspecs matching pattern
+count=0
 find -E . -type f -iregex "${nuspec_pattern}" | while read i; do
 	echo " (i) Packaging ${i}..."
 	"${nuget}" pack "${i}" -noninteractive -verbosity "detailed"
 	echo " (i) Done"
+	count++
 done
 
-echo ""
-echo " (i) Packages created successfully"
+if [[ ${count} -eq 0 ]] ; then
+	echo " (w) No nuspec files found, no packages created"
+else
+	echo " (i) Packages created successfully"
+fi
+
 
 
 echo " (i) Pushing packages matching pattern ${nupkg_pattern}"
 
 # find packages matching pattern
+count=0
 find -E . -type f -iregex "${nupkg_pattern}" | while read i; do
 	echo " (i) Pushing ${i}..."
 	echo "${nuget}" push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
@@ -49,7 +62,10 @@ find -E . -type f -iregex "${nupkg_pattern}" | while read i; do
 	echo " (i) Done"
 done
 
-echo ""
-echo " (i) Packages pushed successfully"
+if [[ ${count} -eq 0 ]] ; then
+	echo " (w) No nupkg files found, no packages pushed"
+else
+	echo " (i) Packages pushed successfully"
+fi
 
 exit 0
