@@ -34,7 +34,7 @@ echo " (i) Packaging specs matching pattern ${nuspec_pattern}"
 # find nuspecs matching pattern
 find -E . -type f -iregex "${nuspec_pattern}" | while read i; do
 	echo " (i) Packaging ${i}..."
-	echo "${nuget}" pack "${i}" -noninteractive -verbosity "detailed"
+	"${nuget}" pack "${i}" -noninteractive -verbosity "detailed"
 	echo " (i) Done"
 done
 
