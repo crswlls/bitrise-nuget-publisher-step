@@ -21,10 +21,11 @@ if [ -z "${nupkg_pattern}" ] ; then
   nupkg_pattern="^\.\/[^/]+.nupkg"
 fi
 
-echo "source:  ${nuget_source_path_or_url}"
-echo "api key: ${nuget_api_key}"
-echo "nuspecs: ${nuspec_pattern}"
-echo "nupkgs:  ${nupkg_pattern}"
+echo "source:    ${nuget_source_path_or_url}"
+echo "api key:   ${nuget_api_key}"
+echo "nuspecs:   ${nuspec_pattern}"
+echo "nupkgs:    ${nupkg_pattern}"
+echo "test mode: ${test_mode}"
 echo ""
 
 nuget="/Library/Frameworks/Mono.framework/Versions/Current/bin/nuget"
