@@ -28,7 +28,12 @@ echo "nupkgs:    ${nupkg_pattern}"
 echo "test mode: ${test_mode}"
 echo ""
 
-nuget="/Library/Frameworks/Mono.framework/Versions/Current/bin/nuget"
+if [ ! -f "./nuget.exe" ]; then
+  echo "Installing latest nuget.exe..."
+  curl -O -L https://nuget.org/nuget.exe
+fi
+
+nuget="mono ./nuget.exe"
 
 echo " (i) Packaging specs matching pattern ${nuspec_pattern}"
 
