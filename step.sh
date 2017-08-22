@@ -40,7 +40,7 @@ echo " (i) Packaging specs matching pattern ${nuspec_pattern}"
 # find nuspecs matching pattern
 find -E . -type f -iregex "${nuspec_pattern}" | while read i; do
 	echo " (i) Packaging ${i}..."
-	"${nuget}" pack "${i}" -noninteractive -verbosity "detailed"
+	${nuget} pack "${i}" -noninteractive -verbosity "detailed"
 	echo " (i) Done"
 done
 
@@ -53,10 +53,10 @@ echo " (i) Pushing packages matching pattern ${nupkg_pattern}"
 # find packages matching pattern
 find -E . -type f -iregex "${nupkg_pattern}" | while read i; do
 	echo " (i) Pushing ${i}..."
-	echo Executing: "${nuget}" push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
+	echo Executing: ${nuget} push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
 	
 	if [[ "${test_mode}" == "no" ]] ; then
-		"${nuget}" push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
+		${nuget} push "${i}" -source "${nuget_source_path_or_url}" -apikey ${nuget_api_key} -noninteractive -verbosity "detailed"
 	fi
 	echo " (i) Done"
 done
